@@ -117,6 +117,7 @@ maple-mini: begin clean gccversion build_maple-mini sizeafter finished  copy_map
 maple-rev3: begin clean gccversion build_maple-rev3 sizeafter finished  copy_maple-rev3 end
 maple-rev5: begin clean gccversion build_maple-rev5 sizeafter finished  copy_maple-rev5 end
 generic-pc13: begin clean gccversion build_generic-pc13 sizeafter finished  copy_generic-pc13 end
+generic-pc13-rst: begin clean gccversion build_generic-pc13-rst sizeafter finished  copy_generic-pc13-rst end
 generic-pg15: begin clean gccversion build_generic-pg15 sizeafter finished  copy_generic-pg15 end
 generic-pd2: begin clean gccversion build_generic-pd2 sizeafter finished  copy_generic-pd2 end
 generic-pd1: begin clean gccversion build_generic-pd1 sizeafter finished  copy_generic-pd1 end
@@ -183,6 +184,17 @@ copy_generic-pc13:
 	@echo "Copying to binaries folder"
 	@echo
 	cp $(TARGET).bin bootloader_only_binaries/generic_boot20_pc13.bin
+	@echo
+
+build_generic-pc13-rst: TARGETFLAGS= -DTARGET_GENERIC_F103_PC13_RST
+# Set the linker script
+build_generic-pc13-rst: LDFLAGS +=-T$(ST_LIB)/c_only_md_high_density.ld
+build_generic-pc13-rst: elf bin lss sym
+copy_generic-pc13-rst:
+	@echo
+	@echo "Copying to binaries folder"
+	@echo
+	cp $(TARGET).bin bootloader_only_binaries/generic_boot20_pc13_rst.bin
 	@echo
 
 build_generic-pg15: TARGETFLAGS= -DTARGET_GENERIC_F103_PG15

@@ -39,9 +39,22 @@ int main()
 {
     bool no_user_jump = FALSE;
     bool dont_wait=FALSE;
-
+    
     systemReset(); // peripherals but not PC
-    setupCLK();
+
+    // Check how we powered up
+    // On power up, we go straight to user code if it exist
+    // If we press reset, or we detect a software reset, it'll
+    // go to the bootloader.
+    if(GET_REG(RCC_CSR) & ((1 << 27)|(1 << 29)) )
+    {
+      SET_REG(RCC_CSR, (1 << 24));
+      goto exit_boot;
+    }
+    
+    SET_REG(RCC_CSR, (1 << 24));
+    
+    setupCLK();    
     setupLEDAndButton();
     setupUSB();
     setupFLASH();
@@ -84,6 +97,8 @@ int main()
         }
     }
 
+exit_boot:
+    
     if (checkUserCode(USER_CODE_FLASH0X8002000))
     {
         jumpToUser(USER_CODE_FLASH0X8002000);

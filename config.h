@@ -157,6 +157,17 @@
     #define BUTTON_PIN 14
     #define BUTTON_PRESSED_STATE 1
 
+#elif defined TARGET_GENERIC_F103_PC13_RST
+
+    #define HAS_MAPLE_HARDWARE 1
+
+    #define LED_BANK            GPIOC
+    #define LED_PIN             13
+    #define LED_ON_STATE        0
+
+    /* USB Disc Pin Setup.   USB DISC is PB9 */
+    #define USB_DISC_BANK         GPIOB
+    #define USB_DISC_PIN              9
 
 #elif defined TARGET_GENERIC_F103_PG15
 

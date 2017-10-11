@@ -49,6 +49,8 @@
 #define RCC_AHBENR  (RCC + 0x14)
 #define RCC_APB2ENR (RCC + 0x18)
 #define RCC_APB1ENR (RCC + 0x1C)
+#define RCC_BDCR    (RCC + 0x20)
+#define RCC_CSR     (RCC + 0x24)
 
 #define FLASH_ACR     (FLASH + 0x00)
 #define FLASH_KEYR    (FLASH + 0x04)
